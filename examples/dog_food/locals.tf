@@ -1,5 +1,5 @@
 locals {
   tags = {
-    Service = var.service_name
+    Application = "Example Application"
   }
 }
