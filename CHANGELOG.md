@@ -1,3 +1,10 @@
+### [1.0.1](https://github.com/rpidanny/aws-federation-github-actions/compare/v1.0.0...v1.0.1) (2022-10-16)
+
+
+### Bug Fixes
+
+* gha workflow permission ([#3](https://github.com/rpidanny/aws-federation-github-actions/issues/3)) ([c719d91](https://github.com/rpidanny/aws-federation-github-actions/commit/c719d91b6773d1d8055d954985955d8ffb180c45))
+
 ## 1.0.0 (2022-10-16)
 
 
