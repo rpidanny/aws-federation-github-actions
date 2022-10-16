@@ -2,6 +2,13 @@ name: Terraform Plan
 description: terraform init, validate, plan
 
 inputs:
+  aws_role_arn:
+    description: ARN of the AWS Role to be assumed
+    required: true
+  aws_region:
+    description: AWS region
+    required: false
+    default: eu-west-1
   commit_sha:
     description: Hash of the commit
     required: true
@@ -24,6 +31,12 @@ inputs:
 runs:
   using: composite
   steps:
+    - name: Configure aws credentials
+      uses: aws-actions/configure-aws-credentials@v1
+      with:
+        role-to-assume: ${{ inputs.aws_role_arn }}
+        aws-region: ${{ inputs.AWS_REGION }}
+
     - name: Setup Terraform
       uses: hashicorp/setup-terraform@v1
       with:
