@@ -47,5 +47,5 @@ jobs:
 
       - uses: ./.github/actions/release
         with:
-          global_github_token: ${{ secrets.GITHUB_TOKEN }}
+          github_token: ${{ secrets.GITHUB_TOKEN }}
           node_version: ${{ env.NODE_VERSION }}
