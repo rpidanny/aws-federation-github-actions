@@ -4,7 +4,7 @@ module "aws_federation_github_actions" {
   github_org = "rpidanny"
 
   iam_role_name   = "automation-gha-ci"
-  iam_policy_arns = [data.aws_iam_policy.AdministratorAccess.arn]
+  iam_policy_arns = ["arn:aws:iam::aws:policy/AdministratorAccess"]
 
   tags = local.tags
 }
