@@ -14,7 +14,7 @@ First, we need to set up an AWS IAM OIDC identity provider and an AWS IAM role t
 
 ```hcl
 module "aws_federation_github_actions" {
-  source = "github.com/rpidanny/aws-federation-github-actions?ref=v1"
+  source = "github.com/rpidanny/aws-federation-github-actions?ref=v1.0.0"
 
   github_org  = "rpidanny"
   github_repo = "example-repo"
@@ -72,17 +72,17 @@ An example integration can be found here: [examples/dog_food](examples/dog_food)
 
 ## Module Inputs
 
-| Name            | Description                                                                                  | Type           | Default | Required |
-| --------------- | -------------------------------------------------------------------------------------------- | -------------- | ------- | :------: |
-| github_org      | Name of the github organization you want to allow access to.                                 | `string`       | n/a     |   yes    |
-| github_repo     | Name of the github repo you want to allow access to. Default will grant access to all repos. | `string`       | `''`    |    no    |
-| iam_role_name   | Name of the IAM role you want to allow access to assume.                                     | `string`       | n/a     |   yes    |
-| iam_policy_arns | List of IAM policy ARNs that is attached to the IAM role.                                    | `list(string)` | `[]`    |    no    |
-| tags            | Resource tags.                                                                               | `map(string)`  | `{}`    |    no    |
+| Name              | Description                                                                                  | Type           | Default | Required |
+| ----------------- | -------------------------------------------------------------------------------------------- | -------------- | ------- | :------: |
+| `github_org`      | Name of the github organization you want to allow access to.                                 | `string`       | n/a     |   yes    |
+| `github_repo`     | Name of the github repo you want to allow access to. Default will grant access to all repos. | `string`       | `''`    |    no    |
+| `iam_role_name`   | Name of the IAM role you want to allow access to assume.                                     | `string`       | n/a     |   yes    |
+| `iam_policy_arns` | List of IAM policy ARNs that is attached to the IAM role.                                    | `list(string)` | `[]`    |    no    |
+| `tags`            | Resource tags.                                                                               | `map(string)`  | `{}`    |    no    |
 
 ## Module Outputs
 
-| Name                        | Description                         |
-| --------------------------- | ----------------------------------- |
-| iam_openid_connect_provider | The created OpenId Connect provider |
-| iam_role                    | The created IAM Role                |
+| Name                          | Description                         |
+| ----------------------------- | ----------------------------------- |
+| `iam_openid_connect_provider` | The created OpenId Connect provider |
+| `iam_role`                    | The created IAM Role                |
