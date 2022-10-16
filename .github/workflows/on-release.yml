@@ -1,0 +1,17 @@
+name: On Release
+
+on:
+  release:
+    types:
+      - published
+
+jobs:
+  update-semver:
+    name: Update Semver
+    runs-on: ubuntu-20.04
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v2
+      - uses: haya14busa/action-update-semver@v1
+        with:
+          major_version_tag_only: false

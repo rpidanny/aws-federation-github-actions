@@ -1,0 +1,42 @@
+{
+  "name": "aws-federation-github-actions",
+  "version": "0.0.0",
+  "description": "Terraform Modules for setting up AWS Federated access from Github Actions.",
+  "main": "main.tf",
+  "scripts": {
+    "prepare": "husky install",
+    "terraform:format": "terraform fmt -recursive",
+    "release": "semantic-release",
+    "release:dry": "semantic-release --branch main --dry-run --no-ci",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rpidanny/aws-federation-github-actions.git"
+  },
+  "keywords": [
+    "terraform",
+    "terraform-module",
+    "github actions",
+    "gha",
+    "aws"
+  ],
+  "author": "rpidanny.abhishek@gmail.com",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/rpidanny/aws-federation-github-actions/issues"
+  },
+  "homepage": "https://github.com/rpidanny/aws-federation-github-actions#readme",
+  "devDependencies": {
+    "@commitlint/cli": "^15.0.0",
+    "@commitlint/config-conventional": "^15.0.0",
+    "@semantic-release/changelog": "^6.0.1",
+    "@semantic-release/commit-analyzer": "^9.0.1",
+    "@semantic-release/git": "^10.0.1",
+    "@semantic-release/github": "^8.0.2",
+    "@semantic-release/npm": "^8.0.3",
+    "@semantic-release/release-notes-generator": "^10.0.2",
+    "husky": "^7.0.4",
+    "semantic-release": "^18.0.0"
+  }
+}

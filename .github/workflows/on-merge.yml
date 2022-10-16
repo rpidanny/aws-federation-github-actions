@@ -1,0 +1,46 @@
+name: On Merge to Main
+
+on:
+  push:
+    branches:
+      - 'main'
+
+env:
+  TF_VERSION: 1.2.9
+  NODE_VERSION: 16
+
+jobs:
+  terraform-plan:
+    name: Terraform Plan
+    runs-on: ubuntu-20.04
+    timeout-minutes: 10
+
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 1
+
+      - uses: ./.github/actions/terraform-plan
+        with:
+          environment: "dev"
+          commit_sha: ${{ github.sha }}
+          tf_directory: examples/dog_food
+          tf_version: ${{ env.TF_VERSION }}
+
+  release:
+    name: Release
+    runs-on: ubuntu-20.04
+    needs:
+      - terraform-plan
+    timeout-minutes: 10
+
+    steps:
+      - name: Clone Repo
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 1
+
+      - uses: ./.github/actions/release
+        with:
+          global_github_token: ${{ secrets.GITHUB_TOKEN }}
+          node_version: ${{ env.NODE_VERSION }}

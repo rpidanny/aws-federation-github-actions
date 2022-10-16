@@ -1,0 +1,49 @@
+name: Terraform Plan
+description: terraform init, validate, plan
+
+inputs:
+  commit_sha:
+    description: Hash of the commit
+    required: true
+  environment:
+    description: dev/ prod environment
+    required: true
+  tf_version:
+    description: Terraform version
+    default: 0.14.11
+    required: false
+  tf_directory:
+    description: Terraform scripts directory
+    default: terraform/dev
+    required: false
+  tf_init_command:
+    description: The terraform init command
+    default: "terraform init -backend-config=config/backend.tfvars"
+    required: false
+
+runs:
+  using: composite
+  steps:
+    - name: Setup Terraform
+      uses: hashicorp/setup-terraform@v1
+      with:
+        terraform_version: ${{ inputs.tf_version }}
+
+    - name: Terraform init
+      run: ${{ inputs.tf_init_command }}
+      shell: bash
+      working-directory: ${{ inputs.tf_directory }}
+
+    - name: Terraform validate
+      run: terraform validate
+      working-directory: ${{ inputs.tf_directory }}
+      shell: bash
+
+    - name: Terraform plan
+      env:
+        TF_VAR_commit_hash: ${{ inputs.commit_sha }}
+        TF_VAR_env: ${{ inputs.environment }}
+      run: |-
+        terraform plan -out=plan.tfout -var-file=config/terraform.tfvars -parallelism=25 -lock=false
+      working-directory: ${{ inputs.tf_directory }}
+      shell: bash
