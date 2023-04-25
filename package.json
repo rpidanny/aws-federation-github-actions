@@ -28,7 +28,7 @@
   },
   "homepage": "https://github.com/rpidanny/aws-federation-github-actions#readme",
   "devDependencies": {
-    "@commitlint/cli": "^15.0.0",
+    "@commitlint/cli": "^17.6.1",
     "@commitlint/config-conventional": "^15.0.0",
     "@semantic-release/changelog": "^6.0.1",
     "@semantic-release/commit-analyzer": "^9.0.1",
@@ -37,6 +37,6 @@
     "@semantic-release/npm": "^8.0.3",
     "@semantic-release/release-notes-generator": "^10.0.2",
     "husky": "^7.0.4",
-    "semantic-release": "^18.0.0"
+    "semantic-release": "^21.0.1"
   }
 }
