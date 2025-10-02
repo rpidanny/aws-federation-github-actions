@@ -3,15 +3,15 @@ variable "github_org" {
   description = "Name of the github organization you want to allow access to"
 }
 
-variable "github_repo" {
-  type        = string
-  description = "Name of the github repo you want to allow access to"
-  default     = ""
+variable "github_repos" {
+  type        = list(string)
+  description = "List of github repositories you want to allow access to"
+  default     = []
 }
 
 variable "iam_role_name" {
   type        = string
-  description = "Name of the IAM role you want to allow access to assume"
+  description = "Name to use when creating the IAM role that GitHub Actions can assume"
 }
 
 variable "iam_policy_arns" {

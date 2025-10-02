@@ -3,7 +3,20 @@ resource "aws_iam_role" "gha_role" {
 
   assume_role_policy = jsonencode({
     Version : "2012-10-17",
-    Statement : [
+    Statement : length(var.github_repos) > 0 ? [
+      for repo in var.github_repos : {
+        Effect : "Allow",
+        Principal : {
+          Federated : aws_iam_openid_connect_provider.github_actions.arn
+        },
+        Action : "sts:AssumeRoleWithWebIdentity",
+        Condition : {
+          StringLike : {
+            "token.actions.githubusercontent.com:sub" : "repo:${var.github_org}/${repo}*"
+          }
+        }
+      }
+    ] : [
       {
         Effect : "Allow",
         Principal : {
@@ -12,7 +25,7 @@ resource "aws_iam_role" "gha_role" {
         Action : "sts:AssumeRoleWithWebIdentity",
         Condition : {
           StringLike : {
-            "token.actions.githubusercontent.com:sub" : "repo:${var.github_org}/${var.github_repo}*"
+            "token.actions.githubusercontent.com:sub" : "repo:${var.github_org}/*"
           }
         }
       }

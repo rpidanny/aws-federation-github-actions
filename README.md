@@ -16,8 +16,8 @@ First, we need to set up an AWS IAM OIDC identity provider and an AWS IAM role t
 module "aws_federation_github_actions" {
   source = "github.com/rpidanny/aws-federation-github-actions?ref=v1.0.0"
 
-  github_org  = "rpidanny"
-  github_repo = "example-repo"
+  github_org   = "rpidanny"
+  github_repos = ["example-repo"]
 
   iam_role_name   = "ExampleGithubRole"
   iam_policy_arns = [data.aws_iam_policy.AdministratorAccess.arn]
@@ -26,11 +26,11 @@ module "aws_federation_github_actions" {
 }
 ```
 
-With this deployed, any jobs in `rpidanny/example-repo` can now assume the IAM Role created above.
+With this deployed, any jobs in the specified repositories can now assume the IAM Role created above.
 
-The `github_org` and `github_repo` ensures that only the repo you specify here can assume the role.
+The `github_org` and `github_repos` ensures that only the repositories you specify can assume the role.
 
-**Note:** If you don't pass in `github_repo`, any repo in your Github Organization will be able to assume the role. This is useful when you want to grant all your organization's repo access to aws.
+You can specify one or more repositories by adding them to the `github_repos` array. To grant access to all repositories in your organization, simply omit the `github_repos` parameter.
 
 ### Configure GitHub Actions Workflow
 
@@ -72,13 +72,13 @@ An example integration can be found here: [examples/dog_food](examples/dog_food)
 
 ## Module Inputs
 
-| Name              | Description                                                                                  | Type           | Default | Required |
-| ----------------- | -------------------------------------------------------------------------------------------- | -------------- | ------- | :------: |
-| `github_org`      | Name of the github organization you want to allow access to.                                 | `string`       | n/a     |   yes    |
-| `github_repo`     | Name of the github repo you want to allow access to. Default will grant access to all repos. | `string`       | `''`    |    no    |
-| `iam_role_name`   | Name of the IAM role you want to allow access to assume.                                     | `string`       | n/a     |   yes    |
-| `iam_policy_arns` | List of IAM policy ARNs that is attached to the IAM role.                                    | `list(string)` | `[]`    |    no    |
-| `tags`            | Resource tags.                                                                               | `map(string)`  | `{}`    |    no    |
+| Name              | Description                                                                                     | Type           | Default | Required |
+| ----------------- | ----------------------------------------------------------------------------------------------- | -------------- | ------- | :------: |
+| `github_org`      | Name of the github organization you want to allow access to.                                    | `string`       | n/a     |   yes    |
+| `github_repos`    | List of github repositories you want to allow access to. Empty list grants access to all repos. | `list(string)` | `[]`    |    no    |
+| `iam_role_name`   | Name to use when creating the IAM role that GitHub Actions can assume.                          | `string`       | n/a     |   yes    |
+| `iam_policy_arns` | List of IAM policy ARNs that is attached to the IAM role.                                       | `list(string)` | `[]`    |    no    |
+| `tags`            | Resource tags.                                                                                  | `map(string)`  | `{}`    |    no    |
 
 ## Module Outputs
 
