@@ -1,6 +1,6 @@
 {
   "name": "aws-federation-github-actions",
-  "version": "1.0.1",
+  "version": "2.0.0",
   "description": "Terraform Modules for setting up AWS Federated access from Github Actions.",
   "main": "main.tf",
   "scripts": {
