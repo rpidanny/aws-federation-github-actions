@@ -55,6 +55,7 @@ jobs:
     # This is the block you would need to add.
     permissions:
       id-token: write # This is required for requesting the JWT
+      contents: read # This is required for the job to read the repository contents
 
     steps:
       - name: configure aws credentials
